@@ -16,6 +16,8 @@ class Tokenizer:
         return self.current_char
 
     def advance(self, skip_whitespace):
+        if self.current_char is None:
+            return
         while True:
             self.position += 1
             c = self.reader.read(1)
@@ -27,9 +29,7 @@ class Tokenizer:
                 return
 
     def munch(self, c):
-        print(f"char {c}")
         ch = self.peek(False)
-        print(f"char {ch}")
 
         if self.peek(False) != c:
             raise ValueError(
